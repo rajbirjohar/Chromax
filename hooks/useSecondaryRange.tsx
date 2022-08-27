@@ -1,12 +1,12 @@
 import { useCallback, useState, useEffect } from "react";
 
-const useSecondaryRange = (props: { color: Color }) => {
-  const [range, setRange] = useState<Color[]>([]);
+const useSecondaryRange = (props: { color: Hsla }) => {
+  const [range, setRange] = useState<Hsla[]>([]);
 
   const calculateSecondaryRange = useCallback(() => {
-    const newRange: Color[] = [];
+    const newRange: Hsla[] = [];
     let light = 0;
-    const color: Color = { ...props.color, h: props.color.h + 60, l: 0 };
+    const color: Hsla = { ...props.color, h: props.color.h + 60, l: 0 };
     for (let i = 0; i < 9; i++) {
       if (color.l < 100) {
         light += 10;

@@ -1,12 +1,12 @@
 import { useCallback, useState, useEffect } from "react";
 
-const useGrayScaleRange = (props: { color: Color }) => {
-  const [range, setRange] = useState<Color[]>([]);
+const useGrayScaleRange = (props: { color: Hsla }) => {
+  const [range, setRange] = useState<Hsla[]>([]);
 
   const calculateGrayScale = useCallback(() => {
-    const newRange: Color[] = [];
+    const newRange: Hsla[] = [];
     let light = 0;
-    const color: Color = { ...props.color, s: 0, l: 0 };
+    const color: Hsla = { ...props.color, s: 0, l: 0 };
     for (let i = 0; i < 9; i++) {
       if (color.l < 100) {
         light += 10;
