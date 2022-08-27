@@ -4,12 +4,15 @@
 
 .main {
   min-height: 100vh;
+  max-width: 60rem;
+  margin: 0 auto;
   padding: 4rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
 }
 
 .introsection {
@@ -17,6 +20,21 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.colorsection {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  gap: 2rem;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.colorpicker {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .footer {
@@ -48,15 +66,8 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
-  }
-  .code {
-    background: #111;
-  }
-  .logo img {
-    filter: invert(1);
+@media (max-width: 868px) {
+  .colorsection {
+    flex-direction: column;
   }
 }

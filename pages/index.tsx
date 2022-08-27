@@ -1,9 +1,14 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import ColorPicker from "../components/ColorPicker";
+import { useState } from "react";
+import { HexColorInput, HslaColorPicker } from "react-colorful";
+import hslToRgba from "utils/hslToRgba";
+import AllColorRanges from "../components/AllColorRanges";
 import styles from "../styles/index.module.css";
 
 const Home: NextPage = () => {
+  const [color, setColor] = useState<Hsla>({ h: 0, s: 22, l: 50, a: 1 });
+  const rgba = hslToRgba({ color: color });
   return (
     <div className={styles.container}>
       <Head>
@@ -16,13 +21,19 @@ const Home: NextPage = () => {
         <section className={styles.introsection}>
           <h1 className={styles.title}>Chroma</h1>
           <h2>The only color palette you&#39;ll need.</h2>
-          <h3>
-            Get started by entering a hex code. Or pick one using the color
-            picker.
-          </h3>
+          <h3>Get started by selecting a fun color below.</h3>
         </section>
-        <section>
-          <ColorPicker />
+        <section className={styles.colorsection}>
+          <div className={styles.colorpicker}>
+            <HslaColorPicker color={color} onChange={setColor} />
+            <h4>
+              hsla({color.h}, {color.s}, {color.l}, {color.a})
+            </h4>
+            <h4>
+              rgba({rgba.r}, {rgba.g}, {rgba.b}, {rgba.a})
+            </h4>
+          </div>
+          <AllColorRanges color={color} />
         </section>
       </main>
 

@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.colorwrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.spacer {
+  width: 1px;
+}
+
+@media (max-width: 868px) {
+  .colorwrapper {
+    overflow-x: auto;
+    padding: 0 2rem 2rem 2rem;
+    margin-inline: -2rem;
+  }
+}
