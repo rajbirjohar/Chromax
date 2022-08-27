@@ -1,7 +1,8 @@
+import Button from "@/components/Button";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import { HexColorInput, HslaColorPicker } from "react-colorful";
+import { HslaColorPicker } from "react-colorful";
 import hslToRgba from "utils/hslToRgba";
 import AllColorRanges from "../components/AllColorRanges";
 import styles from "../styles/index.module.css";
@@ -13,7 +14,9 @@ const Home: NextPage = () => {
     l: 50,
     a: 1,
   });
+
   const rgba = hslToRgba({ color: color });
+
   return (
     <div className={styles.container}>
       <Head>

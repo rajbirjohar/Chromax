@@ -1,12 +1,30 @@
 import usePrimaryRange from "@/hooks/usePrimaryRange";
-import HslaRange from "@/components/ColorRange";
+import ColorRange from "@/components/ColorRange";
 import useSecondaryRange from "@/hooks/useSecondaryRange";
-import styles from "./index.module.css";
 import useGrayScaleRange from "@/hooks/useGrayScaleRange";
 import useComplementaryRange from "@/hooks/useComplementaryRange";
 import useTriadicRange from "@/hooks/useTriadicRange";
+import styles from "./index.module.css";
+import { motion, Variants } from "framer-motion";
+import { Dispatch, SetStateAction, useEffect } from "react";
+import Button from "../Button";
 
-export default function AllHslaRanges(props: { color: Hsla }) {
+const container: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.25,
+    },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+};
+
+export default function AllColorRanges(props: { color: Hsla }): JSX.Element {
   const primaryRange = usePrimaryRange({ color: props.color });
   const secondaryRange = useSecondaryRange({ color: props.color });
   const complementaryRange = useComplementaryRange({ color: props.color });
@@ -14,12 +32,39 @@ export default function AllHslaRanges(props: { color: Hsla }) {
   const triadicRange = useTriadicRange({ color: props.color });
 
   return (
-    <div className={styles.wrapper}>
-      <HslaRange title="Primary" colorRange={primaryRange} />
-      <HslaRange title="Secondary" colorRange={secondaryRange} />
-      <HslaRange title="Complementary" colorRange={complementaryRange} />
-      <HslaRange title="Triadic" colorRange={triadicRange} />
-      <HslaRange title="Gray Scale" colorRange={grayScaleRange} />
-    </div>
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className={styles.wrapper}
+    >
+      <motion.div variants={item}>
+        <ColorRange title="Primary" colorRange={primaryRange} />
+      </motion.div>
+      <motion.div variants={item}>
+        <ColorRange
+          title="Secondary"
+          colorRange={secondaryRange}
+          key="secondary"
+        />
+      </motion.div>
+      <motion.div variants={item}>
+        <ColorRange
+          title="Complementary"
+          colorRange={complementaryRange}
+          key="complementary"
+        />
+      </motion.div>
+      <motion.div variants={item}>
+        <ColorRange title="Triadic" colorRange={triadicRange} key="triadic" />
+      </motion.div>
+      <motion.div variants={item}>
+        <ColorRange
+          title="Gray Scale"
+          colorRange={grayScaleRange}
+          key="grayscale"
+        />
+      </motion.div>
+    </motion.div>
   );
 }
