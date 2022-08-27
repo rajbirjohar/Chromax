@@ -21,3 +21,15 @@
     margin-inline: -2rem;
   }
 }
+
+/* Hide scrollbar on all touch devices  */
+
+@media (hover: none) {
+  .colorwrapper {
+    -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+    scrollbar-width: none !important; /* Firefox */
+  }
+  .colorwrapper::-webkit-scrollbar {
+    display: none !important; /* Safari and Chrome */
+  }
+}

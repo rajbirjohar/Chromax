@@ -1,8 +1,16 @@
+import { motion } from "framer-motion";
 import styles from "./index.module.css";
+
+const color = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 },
+};
 
 export default function Color(props: { color: Hsla }) {
   return (
-    <li
+    <motion.li
+      key={props.color.l}
+      variants={color}
       style={{
         border:
           props.color.l === 50
@@ -18,6 +26,6 @@ export default function Color(props: { color: Hsla }) {
           backgroundColor: `hsla(${props.color.h}, ${props.color.s}%, ${props.color.l}%, ${props.color.a})`,
         }}
       />
-    </li>
+    </motion.li>
   );
 }

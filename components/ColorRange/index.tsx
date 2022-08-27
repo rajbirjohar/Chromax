@@ -1,21 +1,50 @@
 import dynamic from "next/dynamic";
 import Color from "@/components/Color";
+import { motion } from "framer-motion";
 import styles from "./index.module.css";
 
-function ColorRange(props: { title: string; colorRange: Color[] | null }) {
+const wrapper = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    delay: 1,
+  },
+};
+
+const colorRange = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+function ColorRange(props: { title: string; colorRange: Hsla[] | null }) {
   if (props.colorRange === null) {
     return <p>Painting new colors...</p>;
   }
   return (
-    <div className={styles.wrapper}>
+    <motion.div
+      variants={wrapper}
+      initial="hidden"
+      animate="show"
+      className={styles.wrapper}
+    >
       <h2>{props.title}</h2>
-      <ul className={styles.colorwrapper}>
-        {props.colorRange.map((color: Color) => (
+      <motion.ul
+        variants={colorRange}
+        initial="hidden"
+        animate="show"
+        className={styles.colorwrapper}
+      >
+        {props.colorRange.map((color: Hsla) => (
           <Color key={color.l} color={color} />
         ))}
         <div className={styles.spacer} />
-      </ul>
-    </div>
+      </motion.ul>
+    </motion.div>
   );
 }
 

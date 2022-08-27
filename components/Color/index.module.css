@@ -1,9 +1,10 @@
 .color {
-  height: 64px;
-  width: 64px;
+  flex: 1;
   border-radius: 50%;
   cursor: pointer;
-  transition: all 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  height: 56px;
+  width: 56px;
 }
 
 .color:hover {
