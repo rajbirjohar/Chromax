@@ -9,7 +9,7 @@ export default function hslToRgba(props: { color: Hsla }) {
       a: props.color.a,
     };
   if (hsl.s === 0) {
-    let v = 255 * hsl.l;
+    let v = Math.round(255 * hsl.l);
     rgba = {
       r: v,
       g: v,
