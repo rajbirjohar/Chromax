@@ -7,6 +7,9 @@ const usePrimaryRange = (props: { color: Hsla }) => {
     const newRange: Hsla[] = [];
     let light = 0;
     const color: Hsla = { ...props.color, l: 0 };
+    // To generate the scale, I take the original color
+    // and set its lightness value to 0. I then add 10 
+    // incrementally until I get 9 different shades.
     for (let i = 0; i < 9; i++) {
       if (color.l < 100) {
         light += 10;

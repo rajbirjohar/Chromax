@@ -6,6 +6,9 @@ const useGrayScaleRange = (props: { color: Hsla }) => {
   const calculateGrayScale = useCallback(() => {
     const newRange: Hsla[] = [];
     let light = 0;
+    // Monochrome is what happens when saturation is set
+    // to zero. Although this means that gray scale is the 
+    // same for all colors no matter the hue.
     const color: Hsla = { ...props.color, s: 0, l: 0 };
     for (let i = 0; i < 9; i++) {
       if (color.l < 100) {

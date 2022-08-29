@@ -14,18 +14,13 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const Home: NextPage = () => {
   const context = useColorContext();
-  const [color, setColor] = useState<Hsla>({
-    h: 230,
-    s: 100,
-    l: 50,
-    a: 1,
-  });
 
-  const rgba = hslToRgba({ color: color });
+  const rgba = hslToRgba({ color: context.color });
 
-  const primaryRange = usePrimaryRange({ color: color });
+  const primaryRange = usePrimaryRange({ color: context.color });
 
-  const generateColor = () => {
+  const generateExamples = () => {
+    context.setColor(context.color);
     context.setRange(primaryRange);
     if (context.range.length > 0) {
       toast.success("Generated examples");
@@ -51,20 +46,24 @@ const Home: NextPage = () => {
         </section>
         <section className={styles.colorsection}>
           <div className={styles.colorpicker}>
-            <HslaColorPicker color={color} onChange={setColor} />
+            <HslaColorPicker
+              color={context.color}
+              onChange={context.setColor}
+            />
             <div className={styles.codes}>
               <h4 className={styles.code}>
-                <span>HSLA</span> ({color.h}, {color.s}, {color.l}, {color.a})
+                <span>HSLA</span> ({context.color.h}, {context.color.s},{" "}
+                {context.color.l}, {context.color.a})
               </h4>
               <h4 className={styles.code}>
                 <span>RGBA</span> ({rgba.r}, {rgba.g}, {rgba.b}, {rgba.a})
               </h4>
-              <button className={styles.button} onClick={generateColor}>
+              <button className={styles.button} onClick={generateExamples}>
                 Generate
               </button>
             </div>
           </div>
-          <AllColorRanges color={color} />
+          <AllColorRanges color={context.color} />
         </section>
         <section className={styles.examplessection}>
           <h2 className={styles.exampletitle}>Examples</h2>

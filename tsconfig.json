@@ -20,6 +20,7 @@
       "@/pages/*": ["pages/*"],
       "@/utils/*": ["hooks/*"],
       "@/hooks/*": ["hooks/*"],
+      "@/contexts/*": ["contexts/*"],
       "@/styles/*": ["styles/*"]
     }
   },
