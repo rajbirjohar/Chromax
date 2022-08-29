@@ -1,0 +1,7 @@
+.wrapper p {
+    margin: 1rem 0;
+}
+
+.wrapper p:nth-last-child() {
+    margin-bottom: 0;
+}

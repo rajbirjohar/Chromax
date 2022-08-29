@@ -1,0 +1,83 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.titlewrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  background-color: var(--gray-800);
+  border-radius: 8px;
+  font-weight: normal;
+  font-size: 1rem;
+  min-width: max-content;
+  box-shadow: var(--shadows);
+}
+
+.menubutton {
+  background-color: var(--gray-800);
+  border-radius: 8px;
+  height: 36px;
+  width: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 150ms ease-in-out;
+  cursor: pointer;
+}
+
+.menubutton:hover {
+  transform: scale(1.05);
+  background-color: var(--gray-700);
+}
+
+.menubutton:active {
+  transform: scale(0.99);
+}
+
+.menuitem {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+  outline: none;
+  border-radius: 8px;
+}
+
+.menuitem:hover {
+  background-color: var(--gray-700);
+}
+
+.colorwrapper {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.spacer {
+  width: 1px;
+}
+
+@media (max-width: 868px) {
+  .colorwrapper {
+    overflow-x: auto;
+    padding: 0 2rem 2rem 2rem;
+    margin-inline: -2rem;
+  }
+}
+
+/* Hide scrollbar on all touch devices  */
+
+@media (hover: none) {
+  .colorwrapper {
+    -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+    scrollbar-width: none !important; /* Firefox */
+  }
+  .colorwrapper::-webkit-scrollbar {
+    display: none !important; /* Safari and Chrome */
+  }
+}
