@@ -1,13 +1,19 @@
 import Button from "@/components/Button";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { HslaColorPicker } from "react-colorful";
 import hslToRgba from "utils/hslToRgba";
 import AllColorRanges from "../components/AllColorRanges";
 import styles from "../styles/index.module.css";
+import { useColorContext } from "../contexts/ColorContextProvider";
+import usePrimaryRange from "../hooks/usePrimaryRange";
+import Examples from "@/components/Examples";
+import toast from "react-hot-toast";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Home: NextPage = () => {
+  const context = useColorContext();
   const [color, setColor] = useState<Hsla>({
     h: 230,
     s: 100,
@@ -16,6 +22,15 @@ const Home: NextPage = () => {
   });
 
   const rgba = hslToRgba({ color: color });
+
+  const primaryRange = usePrimaryRange({ color: color });
+
+  const generateColor = () => {
+    context.setRange(primaryRange);
+    if (context.range.length > 0) {
+      toast.success("Generated examples");
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -44,9 +59,26 @@ const Home: NextPage = () => {
               <h4 className={styles.code}>
                 <span>RGBA</span> ({rgba.r}, {rgba.g}, {rgba.b}, {rgba.a})
               </h4>
+              <button className={styles.button} onClick={generateColor}>
+                Generate
+              </button>
             </div>
           </div>
           <AllColorRanges color={color} />
+        </section>
+        <section className={styles.examplessection}>
+          <h2 className={styles.exampletitle}>Examples</h2>
+          <AnimatePresence>
+            {context.range.length === 0 ? (
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                Click &#34;Generate&#34; to display examples
+              </motion.p>
+            ) : (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <Examples />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </section>
       </main>
       <footer className={styles.footer}>Powered by the colorblind.</footer>

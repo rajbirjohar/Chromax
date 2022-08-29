@@ -3,8 +3,8 @@
   border-radius: 50%;
   cursor: pointer;
   transition: transform 150ms ease-in-out;
-  height: 56px;
-  width: 56px;
+  height: 64px;
+  width: 64px;
 }
 
 .color:hover {
@@ -15,4 +15,8 @@
   border: 4px solid white;
   padding: 4px;
   border-radius: 50%;
+}
+
+.color:active {
+  transform: scale(0.99);
 }
