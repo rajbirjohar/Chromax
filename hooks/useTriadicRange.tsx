@@ -7,9 +7,18 @@ const useTriadicRange = (props: { color: Hsla }) => {
     const newRange: Hsla[] = [];
     let light = 0;
     // Triadic colors are based on thirds when comparing
-    // to a conic gradient of colors. So I would add 120 
+    // to the conic gradient of colors. So I would add 120
     // to the hue value to achieve that.
-    const color: Hsla = { ...props.color, h: props.color.h + 120, l: 0 };
+    const color: Hsla = {
+      ...props.color,
+      // I have to check if adding 120 will be greater than 360
+      // because the bounds of hue are from 0 - 360.
+      h:
+        props.color.h + 120 > 360
+          ? props.color.h + 120 - 360
+          : props.color.h + 120,
+      l: 0,
+    };
     for (let i = 0; i < 9; i++) {
       if (color.l < 100) {
         light += 10;

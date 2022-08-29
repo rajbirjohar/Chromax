@@ -7,9 +7,18 @@ const useSecondaryRange = (props: { color: Hsla }) => {
     const newRange: Hsla[] = [];
     let light = 0;
     // Secondary colors are calculated by adding 60 to
-    // the hue value. Since hue is based on angle, red would be 0, 
+    // the hue value. Since hue is based on angle, red would be 0,
     // so 60 would be yellow.
-    const color: Hsla = { ...props.color, h: props.color.h + 60, l: 0 };
+    const color: Hsla = {
+      ...props.color,
+      // I have to check if adding 60 will be greater than 360
+      // because the bounds of hue are from 0 - 360.
+      h:
+        props.color.h + 60 > 360
+          ? props.color.h + 60 - 360
+          : props.color.h + 60,
+      l: 0,
+    };
     for (let i = 0; i < 9; i++) {
       if (color.l < 100) {
         light += 10;

@@ -12,7 +12,6 @@ export default function Color(props: { color: Hsla }): JSX.Element {
             : ``,
         padding: 4,
         borderRadius: `50%`,
-        transition: `border 150ms ease-in-out`,
       }}
       onClick={() => {
         navigator.clipboard.writeText(
@@ -29,7 +28,19 @@ export default function Color(props: { color: Hsla }): JSX.Element {
           backgroundColor: `hsla(${props.color.h}, ${props.color.s}%, ${props.color.l}%, ${props.color.a})`,
         }}
       >
-        {props.color.l === 50 && props.color.h}
+        <span
+          style={{
+            color:
+              (props.color.h >= 50 &&
+                props.color.h <= 190 &&
+                props.color.a > 0.5) ||
+              props.color.h >= 400
+                ? "var(--gray-900)"
+                : "var(--gray-50)",
+          }}
+        >
+          {props.color.l === 50 && props.color.h}
+        </span>
       </div>
     </li>
   );

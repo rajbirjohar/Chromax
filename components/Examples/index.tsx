@@ -7,12 +7,22 @@ export default function Examples() {
     <div className={styles.wrapper}>
       <div className={styles.theme}>
         <h3 className={styles.lighttitle}>Light</h3>
-        <Button />
+        <div className={styles.buttonwrapper}>
+          <Button />
+          <Button type="ghost" />
+          <Button type="link" />
+          <Button type="outline" />
+        </div>
         <Title />
       </div>
       <div className={`${styles.theme} ${styles.dark}`}>
         <h3>Dark</h3>
-        <Button dark />
+        <div className={styles.buttonwrapper}>
+          <Button dark />
+          <Button type="ghost" dark />
+          <Button type="link" dark />
+          <Button type="outline" />
+        </div>
         <Title dark />
       </div>
     </div>
