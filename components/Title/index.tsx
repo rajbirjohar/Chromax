@@ -3,8 +3,10 @@ import styles from "./index.module.css";
 
 export default function Title(props: { dark?: boolean }) {
   const context = useColorContext();
-  const primaryDark: Hsla = context.range[8];
-  const primary: Hsla = context.range[0];
+
+  const primary: Hsla = context.light.one;
+  const primaryDark: Hsla = context.light.eight;
+
   const fg = `hsla(${primary.h}, ${primary.s}%, ${primary.l}%, ${primary.a})`;
   const darkFg = `hsla(${primaryDark.h}, ${primaryDark.s}%, ${primaryDark.l}%, ${primaryDark.a})`;
 

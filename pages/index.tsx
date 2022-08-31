@@ -6,29 +6,12 @@ import AllColorRanges from "../components/AllColorRanges";
 import styles from "../styles/index.module.css";
 import { useColorContext } from "../contexts/ColorContextProvider";
 import Examples from "@/components/Examples";
-import toast from "react-hot-toast";
 import { AnimatePresence, motion } from "framer-motion";
-import useCalculateColorRange from "../hooks/useCalculateColorRange";
 
 const Home: NextPage = () => {
   const context = useColorContext();
 
   const rgba = hslToRgba({ color: context.color });
-
-  const primaryRange = useCalculateColorRange({
-    color: context.color,
-    h: null,
-    s: null,
-    l: null,
-  });
-
-  const generateExamples = () => {
-    context.setColor(context.color);
-    context.setRange(primaryRange);
-    if (context.range.length > 0) {
-      toast.success("Generated examples");
-    }
-  };
 
   return (
     <div className={styles.container}>
@@ -61,9 +44,6 @@ const Home: NextPage = () => {
               <h4 className={styles.code}>
                 <span>RGBA</span> ({rgba.r}, {rgba.g}, {rgba.b}, {rgba.a})
               </h4>
-              <button className={styles.button} onClick={generateExamples}>
-                Generate
-              </button>
             </div>
           </div>
           <AllColorRanges color={context.color} />
@@ -83,7 +63,12 @@ const Home: NextPage = () => {
           </AnimatePresence>
         </section>
       </main>
-      <footer className={styles.footer}>Powered by the colorblind.</footer>
+      <footer className={styles.footer}>
+        <span>Powered by the colorblind.</span>
+        <a href="https://rajbir.io/" target="_blank" rel="noreferrer noopener">
+          Like my work?
+        </a>
+      </footer>
     </div>
   );
 };
