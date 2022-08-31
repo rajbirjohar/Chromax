@@ -1,13 +1,7 @@
-import usePrimaryRange from "@/hooks/usePrimaryRange";
 import ColorRange from "@/components/ColorRange";
-import useSecondaryRange from "@/hooks/useSecondaryRange";
-import useGrayScaleRange from "@/hooks/useGrayScaleRange";
-import useComplementaryRange from "@/hooks/useComplementaryRange";
-import useTriadicRange from "@/hooks/useTriadicRange";
 import styles from "./index.module.css";
 import { motion, Variants } from "framer-motion";
-import { Dispatch, SetStateAction, useEffect } from "react";
-import Button from "../Button";
+import useCalculateColorRange from "@/hooks/useCalculateColorRange";
 
 const container: Variants = {
   hidden: { opacity: 0 },
@@ -25,11 +19,42 @@ const item: Variants = {
 };
 
 export default function AllColorRanges(props: { color: Hsla }): JSX.Element {
-  const primaryRange = usePrimaryRange({ color: props.color });
-  const secondaryRange = useSecondaryRange({ color: props.color });
-  const complementaryRange = useComplementaryRange({ color: props.color });
-  const grayScaleRange = useGrayScaleRange({ color: props.color });
-  const triadicRange = useTriadicRange({ color: props.color });
+  const primaryRange = useCalculateColorRange({
+    color: props.color,
+    h: null,
+    s: null,
+    l: null,
+  });
+  const secondaryRange = useCalculateColorRange({
+    color: props.color,
+    h: props.color.h + 60 > 360 ? props.color.h + 60 - 360 : props.color.h + 60,
+    s: null,
+    l: null,
+  });
+  const complementaryRange = useCalculateColorRange({
+    color: props.color,
+    h:
+      props.color.h + 180 > 360
+        ? props.color.h + 180 - 360
+        : props.color.h + 180,
+    s: null,
+    l: null,
+  });
+  const triadicRange = useCalculateColorRange({
+    color: props.color,
+    h:
+      props.color.h + 120 > 360
+        ? props.color.h + 120 - 360
+        : props.color.h + 120,
+    s: null,
+    l: null,
+  });
+  const grayScaleRange = useCalculateColorRange({
+    color: props.color,
+    s: 0,
+    h: null,
+    l: null,
+  });
 
   return (
     <motion.div

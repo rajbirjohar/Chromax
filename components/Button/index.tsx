@@ -7,24 +7,28 @@ export default function Button(props: {
 }): JSX.Element {
   const context = useColorContext();
 
-  const primary: Hsla = context.range[4];
-  const text: Hsla = context.range[8];
-  const primaryDark: Hsla = context.range[5];
-  const textDark: Hsla = context.range[0];
+  const color: Hsla = context.color;
 
-  const bg = `hsla(${primary.h}, ${primary.s}%, ${primary.l}%, ${primary.a})`;
-  const fg = `hsla(${text.h}, ${text.s}%, ${text.l}%, ${text.a})`;
-  const darkBg = `hsla(${primaryDark.h}, ${primaryDark.s}%, ${primaryDark.l}%, ${primaryDark.a})`;
-  const darkFg = `hsla(${textDark.h}, ${textDark.s}%, ${textDark.l}%, ${textDark.a})`;
+  const bg: Hsla = context.light.five;
+  const fg: Hsla = context.light.one;
+  const darkBg: Hsla = context.dark.five;
+  const darkFg: Hsla = context.dark.eight;
+
+  const buttonBg = `hsla(${bg.h}, ${bg.s}%, ${bg.l}%, ${bg.a})`;
+  const buttonBorder = `hsla(${bg.h}, ${bg.s}%, ${bg.l}%, ${bg.a})`;
+  const buttonText = `hsla(${fg.h}, ${fg.s}%, ${fg.l}%, ${fg.a})`;
+  const darkButtonBg = `hsla(${darkBg.h}, ${darkBg.s}%, ${darkBg.l}%, ${darkBg.a})`;
+  const darkButtonBorder = `hsla(${darkBg.h}, ${darkBg.s}%, ${darkBg.l}%, ${darkBg.a})`;
+  const darkButtonText = `hsla(${darkFg.h}, ${darkFg.s}%, ${darkFg.l}%, ${darkFg.a})`;
 
   if (props.type === "ghost") {
     return (
       <button
         style={{
-          backgroundColor: `${props.dark ? fg : fg}`,
-          color: `${props.dark ? darkFg : darkFg}`,
+          backgroundColor: props.dark ? buttonText : darkButtonText,
+          color: props.dark ? darkButtonText : buttonText,
         }}
-        className={styles.ghost}
+        className={styles.button}
       >
         Button
       </button>
@@ -35,10 +39,10 @@ export default function Button(props: {
     return (
       <button
         style={{
-          color: `${props.dark ? fg : darkFg}`,
+          color: props.dark ? darkButtonText : buttonText,
           backgroundColor: "transparent",
         }}
-        className={styles.link}
+        className={styles.button}
       >
         Button
       </button>
@@ -49,11 +53,11 @@ export default function Button(props: {
     return (
       <button
         style={{
-          border: `2px solid ${props.dark ? darkBg : bg}`,
-          color: `${props.dark ? darkBg : bg}`,
+          border: `2px solid ${props.dark ? darkButtonBorder : buttonBorder}`,
+          color: props.dark ? darkButtonBorder : buttonBorder,
           backgroundColor: "transparent",
         }}
-        className={styles.outline}
+        className={styles.button}
       >
         Button
       </button>
@@ -63,8 +67,11 @@ export default function Button(props: {
   return (
     <button
       style={{
-        backgroundColor: `${props.dark ? darkBg : bg}`,
-        color: `${props.dark ? darkFg : fg}`,
+        backgroundColor: props.dark ? darkButtonBg : buttonBg,
+        color:
+          (color.h >= 50 && color.h <= 190 && color.a > 0.5) || color.h >= 400
+            ? buttonText
+            : darkButtonText,
       }}
       className={styles.button}
     >

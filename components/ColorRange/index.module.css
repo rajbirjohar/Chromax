@@ -45,7 +45,7 @@
   cursor: pointer;
   transition: all 150ms ease-in-out;
   outline: none;
-  border-radius: 8px;
+  border-radius: inherit;
 }
 
 .menuitem:hover {
