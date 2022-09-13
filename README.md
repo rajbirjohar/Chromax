@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="500" height="500" src="/documentation/chromax-shadowed.svg">
+</p>
+
 # Chroma
 
 > Rajbir Johar  
