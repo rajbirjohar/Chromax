@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="300" height="300" src="/documentation/chromax-icon-no-bg.svg">
+  <img width="300" height="300" src="/documentation/chromax-no-bg.svg">
 </p>
 
 # Chroma
